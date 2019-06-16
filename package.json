@@ -1,0 +1,22 @@
+{
+  "name": "chord-display",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "A Chord Display web application showing chords being played with a MIDI keyboard",
+  "author": "Rémi Jarasson (https://rednet.io)",
+  "repository": "github:rednetio/chord-display",
+  "homepage": "https://chord-display.rednet.io",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html --public-url \"./\""
+  },
+  "dependencies": {
+    "rsvp": "4.8.5",
+    "tonal": "3.0.0-alpha2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.0",
+    "parcel-bundler": "^1.6.1"
+  }
+}
