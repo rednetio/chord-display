@@ -90,21 +90,43 @@ a { color: hsl(6, 63%, 46%); }
 
 #keyboard {
   margin-top: auto;
-  background: #000;
+  background: #222;
   padding: 8px;
 }
 
 #keyboard-bg {
-  fill: #000;
+  fill: #222;
 }
 
-#board {
+#wheels {
+
+}
+
+#pitchWheel {
+  
+}
+
+.wheel {
+  fill: url(#wheelGradient);
+}
+
+.wheelSocket {
+  fill: #222;
+  filter: url(#insetWheel);
+}
+
+#board-border {
   fill: none;
   stroke: #000;
 }
 
 .piano-key {
-  stroke:#666;
+  stroke: #666;
+}
+
+.piano-key-name {
+  font-size: 14px;
+  fill: rgba(0,0,0,0.2);
 }
 
 .note.white .piano-key {
@@ -117,12 +139,13 @@ a { color: hsl(6, 63%, 46%); }
 
 .note.white.active .piano-key {
   fill:hsl(6, 63%, 80%);
-  filter: url(#inset-shadow);
+  filter: url(#insetKey);
 }
 
 .note.black.active .piano-key {
+  fill: #bf3a2b;
   fill:hsl(6, 63%, 46%);
-  filter: url(#inset-shadow);
+  filter: url(#insetKey);
 }
 
 .note.white .piano-tonic {

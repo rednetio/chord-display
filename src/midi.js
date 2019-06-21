@@ -5,6 +5,7 @@ import {
   noteOn,
   controller,
   pitchWheel,
+  modWheel,
   polyPressure,
 } from './events';
 import { setChordHtml, setNotesHtml } from './ui';
@@ -29,7 +30,11 @@ function midiMessageReceived(ev) {
     // note on
     noteOn(noteNumber, velocity / 127.0);
   } else if (cmd === 11) {
-    controller(noteNumber, velocity / 127.0);
+    if (noteNumber === 1) {
+      modWheel(velocity / 127.0);
+    } else {
+      controller(noteNumber, velocity / 127.0);
+    }
   } else if (cmd === 14) {
     // pitch wheel
     pitchWheel((velocity * 128.0 + noteNumber - 8192) / 8192.0);
