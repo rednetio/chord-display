@@ -1,11 +1,21 @@
 import Note from 'tonal/note';
 import { chord as detectChord } from 'tonal/detect';
-import { highlightNote, fadeNote, highlightTonic, fadeTonics, setChordHtml, setNotesHtml } from './ui';
+import {
+  highlightNote,
+  fadeNote,
+  highlightTonic,
+  fadeTonics,
+  setChordHtml,
+  setNotesHtml,
+  setPitchWheel,
+  setModWheel,
+} from './ui';
 import { chordToHtml, keyToHtml } from './chords';
 
-
-console.log(chord)
 const currentNotes = [];
+let currentPitch = 0;
+let currentModulation = 0;
+
 let previousChord = null;
 
 export function noteOn(noteNumber) {
@@ -24,6 +34,16 @@ export function noteOff(noteNumber) {
     fadeNote(noteNumber);
   }
   refresh();
+}
+
+export function pitchWheel(pitch) {
+  currentPitch = pitch;
+  setPitchWheel(pitch);
+}
+
+export function modWheel(mod) {
+  currentModulation = mod;
+  setModWheel(currentModulation);
 }
 
 function onEvent(...args) {
@@ -51,9 +71,7 @@ function refresh() {
     setChordHtml('');
     fadeTonics();
   }
-  
 }
 
 export const controller = onEvent.bind(this, 'controller');
-export const pitchWheel = onEvent.bind(this, 'pitchWheel');
 export const polyPressure = onEvent.bind(this, 'polyPressure');
