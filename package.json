@@ -1,6 +1,6 @@
 {
   "name": "chord-display",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "A Chord Display web application showing chords being played with a MIDI keyboard",
   "author": "Rémi Jarasson (https://rednet.io)",

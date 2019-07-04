@@ -10,8 +10,7 @@ import {
 import { setChordHtml, setNotesHtml } from './ui';
 
 const PREFERRED_MIDI = [
-  'MPK',
-  'Key',
+  'mpk',
   'key',
 ];
 
@@ -76,8 +75,6 @@ function populateMIDIInSelect() {
         preferred = true;
       }
     }
-
-
 
     selectMIDI.appendChild(
       new Option(input.name, input.id, preferred, preferred),
