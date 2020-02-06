@@ -76,7 +76,7 @@ a { color: hsl(6, 63%, 46%); }
 }
 
 #chord {  
-  font-size: 25vh;
+  font-size: 20vh;
   text-align: center;
 }
 
@@ -149,6 +149,7 @@ a { color: hsl(6, 63%, 46%); }
   fill: rgba(0,0,0,0.2);
 }
 
+
 .note.white .piano-key {
   fill: url(#whiteKey);
 }
@@ -157,14 +158,21 @@ a { color: hsl(6, 63%, 46%); }
   fill: url(#blackKey);
 }
 
+.note.black {
+  color:hsl(6, 63%, 46%);
+}
+
+.note.white {
+  color:hsl(6, 63%, 80%);
+}
+
 .note.white.active .piano-key {
-  fill:hsl(6, 63%, 80%);
+  fill: currentColor;
   filter: url(#insetKey);
 }
 
 .note.black.active .piano-key {
-  fill: #bf3a2b;
-  fill:hsl(6, 63%, 46%);
+  fill: currentColor;
   filter: url(#insetKey);
 }
 

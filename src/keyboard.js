@@ -24,15 +24,15 @@ const WHEEL_AMPLITUDE = 2 * WHEEL_HEIGHT - 80;
 
 const WHEEL_SOCKET_BASE_COLOR = '#222222';
 
-const NOTE_WHITE_TEMPLATE = (props, posX) => `\
-<g id="note-${props.midi}" class="note white" transform="translate(${posX},0)">
+const NOTE_WHITE_TEMPLATE = (props, posX, color) => `\
+<g id="note-${props.midi}" class="note white" transform="translate(${posX},0)" style="color: ${color};">
   <rect class="piano-key" width="${NOTE_WHITE_WIDTH}" height="${NOTE_WHITE_HEIGHT+NOTE_RADIUS}" x="0" y="${-NOTE_RADIUS}" rx="${NOTE_RADIUS}" ry="${NOTE_RADIUS}"></rect>
   <circle class="piano-tonic" cx="${NOTE_WHITE_WIDTH/2}" cy="${NOTE_WHITE_HEIGHT-NOTE_TONIC_BOTTOM_OFFSET}" r="${NOTE_TONIC_RADIUS}"></circle>
   <text class="piano-key-name" x="${NOTE_WHITE_WIDTH/2}" y="${NOTE_WHITE_HEIGHT-NOTE_NAME_BOTTOM_OFFSET}" text-anchor="middle">${props.name}</text>
 </g>`;
 
-const NOTE_BLACK_TEMPLATE = (props, posX) => `\
-<g id="note-${props.midi}" class="note black" transform="translate(${posX - NOTE_BLACK_WIDTH/2},0)">
+const NOTE_BLACK_TEMPLATE = (props, posX, color) => `\
+<g id="note-${props.midi}" class="note black" transform="translate(${posX - NOTE_BLACK_WIDTH/2},0)" style="color: ${color};">
   <rect class="piano-key" width="${NOTE_BLACK_WIDTH}" height="${NOTE_BLACK_HEIGHT+NOTE_RADIUS}" x="0" y="${-NOTE_RADIUS}" rx="${NOTE_RADIUS}" ry="${NOTE_RADIUS}"></rect>
   <circle class="piano-tonic" cx="${NOTE_BLACK_WIDTH/2}" cy="${NOTE_BLACK_HEIGHT-NOTE_TONIC_BOTTOM_OFFSET}" r="${NOTE_TONIC_RADIUS}"></circle>
 </g>`;
@@ -127,7 +127,7 @@ function getWheelsMarkup(ids) {
   }, { width: 0, height: WHEEL_HEIGHT, markup: ''})
 }
 
-function getNoteMarkup(noteNumber, offsetX) {
+function getNoteMarkup(noteNumber, offsetX, colorNoteWhite, colorNoteBlack) {
   const note = Note.fromMidi(noteNumber, { sharps: true });
   const props = Note.props(note);
 
@@ -135,18 +135,18 @@ function getNoteMarkup(noteNumber, offsetX) {
     return {
       width: 0,
       isWhite: false,
-      markup: NOTE_BLACK_TEMPLATE(props, offsetX),
+      markup: NOTE_BLACK_TEMPLATE(props, offsetX, colorNoteBlack),
     }
   }
 
   return {
     width: NOTE_WHITE_WIDTH,
     isWhite: true,
-    markup: NOTE_WHITE_TEMPLATE(props, offsetX),
+    markup: NOTE_WHITE_TEMPLATE(props, offsetX, colorNoteWhite),
   }
 }
 
-export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel']) {
+export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel'], colorNoteWhite = '#bf3a2b', colorNoteBlack = '#bf3a2b') {
   const fromProps = Note.props(Note.simplify(from));
   const toProps = Note.props(Note.simplify(to));
 
@@ -171,7 +171,7 @@ export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel']
 
   const keyboardNotes = range(start, end).reduce(
     (keyboard, noteNumber) => {
-      const { width, isWhite, markup } = getNoteMarkup(noteNumber, keyboard.width);
+      const { width, isWhite, markup } = getNoteMarkup(noteNumber, keyboard.width, colorNoteWhite, colorNoteBlack);
       return {
         width: keyboard.width + width,
         height: keyboard.height,
@@ -228,12 +228,16 @@ export function render(reset) {
   const noteEnd = getSetting('noteEnd');
   const pitchWheelEnabled = getSetting('pitchWheelEnabled');
   const modWheelEnabled = getSetting('modWheelEnabled');
+  const colorNote = getSetting('colorNote');
+  const colorNoteWhite = mixRGB(colorNote, '#ffffff', 0.4);
+  const colorNoteBlack = colorNote;
+
   const wheels = [];
 
   if (pitchWheelEnabled) wheels.push('pitchWheel');
   if (modWheelEnabled) wheels.push('modWheel');
 
-  keyboardContainer.innerHTML = generateKeyboard(noteStart, noteEnd, wheels);
+  keyboardContainer.innerHTML = generateKeyboard(noteStart, noteEnd, wheels, colorNoteWhite, colorNoteBlack);
   if (reset) {
     setPitchWheel(0);
     setModWheel(0);
