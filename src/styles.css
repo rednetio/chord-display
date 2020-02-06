@@ -3,6 +3,7 @@ html, body {
   height: 100%;
   margin: 0;
   line-height: 1;
+  overflow: hidden;
 }
 
 #app {
@@ -27,11 +28,6 @@ html, body {
 #app:hover #settings {
   visibility: visible;
 }
-
-/* TEMP */
-/* #app #settings {
-  visibility: visible;
-} */
 
 #settings fieldset {
   background: rgba(255,255,255,0.5);
