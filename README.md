@@ -12,13 +12,16 @@ I was searching for a VST or any software that can show me the chords while I (o
 And I was unable to find any good solution, so I created this free tool.
 It is very simple and very customizable, since it's based on the Web MIDI API now supported by all modern browsers.
 
-You can use it for streaming on Twitch by including it as a BrowserSource in OBS (Open Broadcast Software) or for your Youtube videos.
+You can use it for streaming on Twitch by including it as a BrowserSource in OBS (Open Broadcast Software), Streamlabs OBS or for your Youtube videos.
 Do not hesitate to mention it in your channel and video description.
 
 ## Customize
 
 You can customize Chord Display without knowing much about programming.
-For instance, OBS BrowserSource let you inject any CSS in the page, to let you:
+
+### via CSS
+
+OBS BrowserSource let you inject any CSS in the page, so you can add any style to existing layout, like:
 
 Remove detected Chord:
 ```css
@@ -76,6 +79,56 @@ Change Text Color:
 body { color: #fff; }
 ```
 
+Change Note Highlight Colors:
+```css
+.note.white { color: #ff4444; }
+.note.black { color: #ff0000; }
+```
+
+Change chord size and placement:
+```css
+#chordContainer {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 2vh;
+}
+
+#chord {
+  font-size: 10vh;
+}
+
+#notes { display: none; }
+```
+
+### via Settings in Query Params
+
+Settings are passed throught URL query params (urlencoded), and let you customize some features that might need programmatical changes.
+When using Chord Display with a standard web browser, on mouse over, the settings sections appears.
+Any changes to settings are reflected in URL, and will be kept on refresh.
+
+To persist those settings, favorite the page, or copy/paste it in OBS BrowserSource to use the same settings.
+
+With settings you can:
+
+| Setting Name         | Description                                           |
+|----------------------|-------------------------------------------------------|
+| midiIn               | Select the midi input (by name)                       |
+| noteStart            | First note of keyboard                                |
+| noteEnd              | Last note of keyboard                                 |
+| latinNotationEnabled | Display notes and chords with latin (french) notation |
+| pitchWheelEnabled    | Display the pitch wheel                               |
+| modWheelEnabled      | display the mod wheel                                 |
+| colorNote            | Base color of hightlight notes                        |
+| colorPitchWheelDown  | Color when pitch wheel goes down                      |
+| colorPitchWheelUp    | Color when pitch wheel goes up                        |
+| colorModWheel        | Mod wheel color                                       |
+| hideKeyboard         | Hide the keyboard                                     |
+| hideNotes            | Hide the played notes names                           |
+| hideChord            | Hide the guessed chord                                |
+| hideBassNote         | Hide the bass note of played chord                    |
+| hideKeyName          | Hide name of notes on keys                            |
+| hideTonic            | Hide tonic dot on keys                                |
+
 ## What then ?
 
 ### Build
@@ -92,12 +145,12 @@ npm build
 
 ### Planned features / Ideas
 
-- [ ] Change keyboard size / octaves
-- [ ] Settings via URL (keyboard size, MIDI Input, French notation, style without CSS, ...)
+- [x] Change keyboard size / octaves
+- [x] Settings via URL (keyboard size, MIDI Input, French notation, style without CSS, ...)
+- [x] Pitch Wheel / ModWheel
+- [ ] Sustain pedal ?
 - [ ] Better chord notations and alternative notations (provided by tonal)
 - [ ] Scale detection and display (provided by tonal)
-- [ ] Sustain pedal ?
-- [ ] Pitch Wheel ?
 
 ### Contribute / Bugs
 
