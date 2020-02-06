@@ -1,9 +1,15 @@
 import Note from 'tonal/note';
 import { range } from './utils';
-export { setPitchWheel, setModWheel } from './keyboard';
+import { getSetting } from './settings';
+import { render as renderKeyboard, setPitchWheel, setModWheel } from './keyboard';
 
+const LAYOUT_SETTINGS = ['hideKeyboard', 'hideNotes', 'hideChord', 'hideBassNote', 'hideKeyName', 'hideTonic'];
+
+const appContainer = document.getElementById('app');
 const chordDisplay = document.getElementById('chord');
 const notesDisplay = document.getElementById('notes');
+
+export { setPitchWheel, setModWheel };
 
 export function highlightNote(noteNumber, className = 'active') {
   const keyElement = document.getElementById(`note-${noteNumber}`);
@@ -43,4 +49,31 @@ export function setChordHtml(html) {
 
 export function setNotesHtml(html) {
   notesDisplay.innerHTML = html;
+}
+
+export function setLayoutSettings() {
+  for (const setting of LAYOUT_SETTINGS) {
+    const value = getSetting(setting);
+
+    if (value) {
+      appContainer.classList.add(setting);
+    } else {
+      appContainer.classList.remove(setting);
+    }
+  }  
+}
+
+export function setAppLoaded(message) {
+  appContainer.classList.add('loaded');
+}
+
+export function setAppError(message) {
+  appContainer.classList.add('error');
+  setChordHtml('Error');
+  setNotesHtml(message);
+}
+
+export function render(reset) {
+  setLayoutSettings();
+  renderKeyboard(reset);
 }

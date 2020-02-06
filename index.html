@@ -21,7 +21,29 @@
         <form>
           <fieldset>
             <legend>Settings:</legend>
-            <label>MIDI Input: <select id="midiIn"></select></label>
+            <label><span>MIDI Input: </span><select id="midiIn"></select></label>
+            <label><span>Note Start: </span><input id="noteStart" type="text" size="2" maxlength="2" /></label>
+            <label><span>Note End: </span><input id="noteEnd" type="text" size="2" maxlength="2" /></label>
+            <fieldset>
+              <legend>Features:</legend>
+              <label><span>Pitch Wheel: </span><input id="pitchWheelEnabled" type="checkbox" /></label>
+              <label><span>Mod Wheel: </span><input id="modWheelEnabled" type="checkbox" /></label>
+            </fieldset>
+            <fieldset>
+              <legend>Colors:</legend>
+              <label><span>Pitch Up: </span><input id="colorPitchWheelUp" type="color" /></label>
+              <label><span>Pitch Down: </span><input id="colorPitchWheelDown" type="color" /></label>
+              <label><span>Mod Wheel: </span><input id="colorModWheel" type="color" /></label>
+            </fieldset>
+            <fieldset>
+              <legend>Hide elements:</legend>
+              <label><span>Keyboard: </span><input id="hideKeyboard" type="checkbox" /></label>
+              <label><span>Chord Name: </span><input id="hideChord" type="checkbox" /></label>
+              <label><span>Bass Note: </span><input id="hideBassNote" type="checkbox" /></label>
+              <label><span>Notes: </span><input id="hideNotes" type="checkbox" /></label>
+              <label><span>Key Names: </span><input id="hideKeyName" type="checkbox" /></label>
+              <label><span>Tonic: </span><input id="hideTonic" type="checkbox" /></label>
+            </fieldset>
           </fieldset>
         </form>
       </div>
@@ -32,10 +54,7 @@
 
       <div id="notes">Play now and see your notes</div>
 
-      <div id="keyboard">
-        <!--<svg width="100%" viewBox="0 0 1680 150" version="1.1" xmlns="http://www.w3.org/2000/svg">-->
-
-      </div>
+      <div id="keyboard"></div>
     </div>
 
     <script src="src/index.js"></script>

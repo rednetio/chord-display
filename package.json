@@ -12,6 +12,8 @@
     "build": "parcel build index.html --public-url \"./\""
   },
   "dependencies": {
+    "history": "^4.10.1",
+    "qs": "^6.9.1",
     "rsvp": "4.8.5",
     "tonal": "3.0.0-alpha2"
   },

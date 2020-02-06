@@ -1,5 +1,6 @@
 import Note from 'tonal/note';
-import { range, toRGBA } from './utils';
+import { range, mixRGB } from './utils';
+import { getSetting } from './settings';
 
 const keyboardContainer = document.getElementById('keyboard');
 
@@ -21,9 +22,7 @@ const WHEEL_WIDTH = NOTE_WHITE_WIDTH;
 const WHEEL_HEIGHT = NOTE_WHITE_HEIGHT;
 const WHEEL_AMPLITUDE = 2 * WHEEL_HEIGHT - 80;
 
-const pitchWheelColorDown = '#bf3a2b'
-const pitchWheelColorUp = '#44ffaa';
-const modWheelColor = '#44bbff';
+const WHEEL_SOCKET_BASE_COLOR = '#222222';
 
 const NOTE_WHITE_TEMPLATE = (props, posX) => `\
 <g id="note-${props.midi}" class="note white" transform="translate(${posX},0)">
@@ -152,7 +151,7 @@ export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel']
   const toProps = Note.props(Note.simplify(to));
 
   const noteStart = (
-    fromProps.name
+    fromProps.name && fromProps.midi
     ? fromProps.alt
       ? fromProps.midi - 1
       : fromProps.midi
@@ -160,14 +159,17 @@ export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel']
   );
 
   const noteEnd = (
-    toProps.name
+    toProps.name && toProps.midi
     ? toProps.alt
       ? toProps.midi + 1
       : toProps.midi
-    : Note.midi('B4')
+    : Note.midi('C5')
   );
+  
+  const start = Math.min(noteStart, noteEnd);
+  const end = Math.max(noteStart, noteEnd);
 
-  const keyboardNotes = range(noteStart, noteEnd).reduce(
+  const keyboardNotes = range(start, end).reduce(
     (keyboard, noteNumber) => {
       const { width, isWhite, markup } = getNoteMarkup(noteNumber, keyboard.width);
       return {
@@ -185,28 +187,58 @@ export function generateKeyboard(from, to, wheelIds = ['pitchWheel', 'modWheel']
   return KEYBOARD_TEMPLATE(keyboardNotes, wheels);
 }
 
+let currentPitch = 0;
+let currentMod = 0;
+
 export function setPitchWheel(pitch) {
+  currentPitch = pitch;
+  const pitchWheelEnabled = getSetting('pitchWheelEnabled');
+  if (!pitchWheelEnabled) return;
+
   const pitchWheelSocket = document.querySelector('#pitchWheel .wheelSocket');
   const pitchWheel = document.querySelector('#pitchWheel .wheel');
+  const colorPitchWheelDown = getSetting('colorPitchWheelDown');
+  const colorPitchWheelUp = getSetting('colorPitchWheelUp');
 
   const translateY = -(WHEEL_HEIGHT / 2) - pitch * (WHEEL_AMPLITUDE / 4);
   pitchWheel.setAttribute('transform', `translate(0, ${translateY})`);
   if (pitch > 0) {
-    pitchWheelSocket.style.fill = toRGBA(pitchWheelColorUp, pitch);
+    pitchWheelSocket.style.fill = mixRGB(colorPitchWheelUp, WHEEL_SOCKET_BASE_COLOR, pitch);
   } else {
-    pitchWheelSocket.style.fill = toRGBA(pitchWheelColorDown, -pitch);
+    pitchWheelSocket.style.fill = mixRGB(colorPitchWheelDown, WHEEL_SOCKET_BASE_COLOR, -pitch);
   }
 }
 
 export function setModWheel(mod) {
+  currentMod = mod;
+  const modWheelEnabled = getSetting('modWheelEnabled');
+  if (!modWheelEnabled) return;
+
   const modWheelSocket = document.querySelector('#modWheel .wheelSocket');
   const modWheel = document.querySelector('#modWheel .wheel');
+  const colorModWheel = getSetting('colorModWheel');
 
   const translateY = -((WHEEL_HEIGHT - WHEEL_AMPLITUDE / 2) / 2) - mod * (WHEEL_AMPLITUDE / 2) ;
   modWheel.setAttribute('transform', `translate(0, ${translateY})`);
-  modWheelSocket.style.fill = toRGBA(modWheelColor, mod);
+  modWheelSocket.style.fill = mixRGB(colorModWheel, WHEEL_SOCKET_BASE_COLOR, mod);
 }
 
-export function initializeKeyboard() {
-  keyboardContainer.innerHTML = generateKeyboard('C0', 'C6');
+export function render(reset) {
+  const noteStart = getSetting('noteStart');
+  const noteEnd = getSetting('noteEnd');
+  const pitchWheelEnabled = getSetting('pitchWheelEnabled');
+  const modWheelEnabled = getSetting('modWheelEnabled');
+  const wheels = [];
+
+  if (pitchWheelEnabled) wheels.push('pitchWheel');
+  if (modWheelEnabled) wheels.push('modWheel');
+
+  keyboardContainer.innerHTML = generateKeyboard(noteStart, noteEnd, wheels);
+  if (reset) {
+    setPitchWheel(0);
+    setModWheel(0);
+  } else {
+    setPitchWheel(currentPitch);
+    setModWheel(currentMod);
+  }
 }

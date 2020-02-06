@@ -8,12 +8,21 @@ import {
   modWheel,
   polyPressure,
 } from './events';
-import { setChordHtml, setNotesHtml } from './ui';
+import { setChordHtml, setNotesHtml, setAppError, setAppLoaded } from './ui';
+import { getSetting, setSetting } from './settings';
 
 const PREFERRED_MIDI = [
   'mpk',
   'key',
+  'piano',
 ];
+
+const CMD_NOTE_OFF = 8;
+const CMD_NOTE_ON = 9;
+const CMD_AFTERTOUCH = 10;
+const CMD_CC = 11;
+const CMD_PITCHBEND = 14;
+const NOTE_CC_MODWHEEL = 1;
 
 function midiMessageReceived(ev) {
   let cmd = ev.data[0] >> 4;
@@ -22,23 +31,23 @@ function midiMessageReceived(ev) {
   let velocity = ev.data[2];
 
   if (channel === 9) return;
-  if (cmd === 8 || (cmd === 9 && velocity === 0)) {
+  if (cmd === CMD_NOTE_OFF || (cmd === CMD_NOTE_ON && velocity === 0)) {
     // with MIDI, note on with velocity zero is the same as note off
     // note off
     noteOff(noteNumber);
-  } else if (cmd === 9) {
+  } else if (cmd === CMD_NOTE_ON) {
     // note on
     noteOn(noteNumber, velocity / 127.0);
-  } else if (cmd === 11) {
-    if (noteNumber === 1) {
+  } else if (cmd === CMD_CC) {
+    if (noteNumber === NOTE_CC_MODWHEEL) {
       modWheel(velocity / 127.0);
     } else {
       controller(noteNumber, velocity / 127.0);
     }
-  } else if (cmd === 14) {
+  } else if (cmd === CMD_PITCHBEND) {
     // pitch wheel
     pitchWheel((velocity * 128.0 + noteNumber - 8192) / 8192.0);
-  } else if (cmd === 10) {
+  } else if (cmd === CMD_AFTERTOUCH) {
     // poly aftertouch
     polyPressure(noteNumber, velocity / 127);
   } else console.log('' + ev.data[0] + ' ' + ev.data[1] + ' ' + ev.data[2]);
@@ -48,7 +57,7 @@ let selectMIDI = null;
 let midiAccess = null;
 let midiIn = null;
 
-function selectMIDIIn(ev) {
+export function selectMIDIIn(ev) {
   if (midiIn) midiIn.onmidimessage = null;
   let id = ev.target[ev.target.selectedIndex].value;
   if (typeof midiAccess.inputs === 'function')
@@ -56,9 +65,13 @@ function selectMIDIIn(ev) {
     midiIn = midiAccess.inputs()[ev.target.selectedIndex];
   else midiIn = midiAccess.inputs.get(id);
   if (midiIn) midiIn.onmidimessage = midiMessageReceived;
+
+  setSetting('midiIn', midiIn.name.toString());
 }
 
 function populateMIDIInSelect() {
+  const midiInSetting = getSetting('midiIn');
+
   // clear the MIDI input select
   selectMIDI.options.length = 0;
   if (midiIn && midiIn.state == 'disconnected') midiIn = null;
@@ -67,23 +80,32 @@ function populateMIDIInSelect() {
   let inputs = midiAccess.inputs.values();
   for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
     input = input.value;
-
-    if (!firstInput) firstInput = input;
     const str = input.name.toString();
+    
+    if (!firstInput) {
+      firstInput = input;
+    }
+
     let preferred = false;
 
-    // if we're rebuilding the list, but we already had this port open, reselect it.
-    if (midiIn && midiIn === input) preferred = true; 
+    if (midiIn && midiIn === input) {
+      preferred = true;
+    }
+
+    if (!midiIn && midiInSetting && str.toLowerCase().indexOf(midiInSetting.toLowerCase()) !== -1) {
+      preferred = true;
+    }
 
     for (const pref of PREFERRED_MIDI) {
       if (!midiIn && str.toLowerCase().indexOf(pref) !== -1) {
         preferred = true;
-      }
+      } 
     }
 
     selectMIDI.appendChild(
       new Option(input.name, input.id, preferred, preferred),
     );
+
     if (preferred) {
       midiIn = input;
       midiIn.onmidimessage = midiMessageReceived;
@@ -102,24 +124,17 @@ function midiConnectionStateChange(e) {
 
 function onMIDIStarted(midi) {
   midiAccess = midi;
-
-  document.getElementById('app').className = 'loaded';
+  setAppLoaded()
   selectMIDI = document.getElementById('midiIn');
   midi.onstatechange = midiConnectionStateChange;
   populateMIDIInSelect();
-  selectMIDI.onchange = selectMIDIIn;
 }
 
 function onMIDISystemError(err) {
-  document.getElementById('app').className = 'error';
-  showError();
+  setAppError('Cannot initialize MIDI');
   console.log(`MIDI not initialized - error encountered: ${err.code}`);
 }
 
-function showError() {
-  setChordHtml('Error');
-  setNotesHtml('Cannot initialize MIDI');
-}
 
 export function initializeMidi() {
   if (navigator.requestMIDIAccess) {
