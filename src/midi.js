@@ -124,7 +124,7 @@ function midiConnectionStateChange(e) {
 
 function onMIDIStarted(midi) {
   midiAccess = midi;
-  setAppLoaded()
+  setAppLoaded();
   selectMIDI = document.getElementById('midiIn');
   midi.onstatechange = midiConnectionStateChange;
   populateMIDIInSelect();
@@ -140,6 +140,6 @@ export function initializeMidi() {
   if (navigator.requestMIDIAccess) {
     navigator.requestMIDIAccess().then(onMIDIStarted, onMIDISystemError);
   } else {
-    showError();
+    setAppError('Your browser has no MIDI features.');
   }
 }
