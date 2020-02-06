@@ -4,7 +4,17 @@
   "version": "0.2.0",
   "license": "MIT",
   "description": "A free web application to show chords and notes being played with a MIDI keyboard",
-  "keywords": ["music","chord","notes","display","midi","keyboard","OBS","streamlabs","overlay"],
+  "keywords": [
+    "music",
+    "chord",
+    "notes",
+    "display",
+    "midi",
+    "keyboard",
+    "OBS",
+    "streamlabs",
+    "overlay"
+  ],
   "author": "Rémi Jarasson (https://rednet.io)",
   "repository": "github:rednetio/chord-display",
   "homepage": "https://chord-display.rednet.io",
@@ -14,14 +24,13 @@
     "build": "parcel build index.html --public-url \"./\""
   },
   "dependencies": {
-    "history": "^4.10.1",
     "qs": "^6.9.1",
     "rsvp": "4.8.5",
     "tonal": "3.0.0-alpha2"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1",
+    "@babel/core": "7.8.4",
+    "parcel-bundler": "^1.12.4",
     "posthtml-expressions": "^1.1.1"
   }
 }
