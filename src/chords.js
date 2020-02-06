@@ -1,10 +1,10 @@
 import Note from 'tonal/note';
+import { getSetting } from './settings';
 
-const ROMAN_NOTATION = false;
 const FLAT_HTML = '<span class="flat">♭</span>';
 const SHARP_HTML = '<span class="sharp">♯</span>';
 
-const NOTES = {
+const LATIN_NOTES = {
   C: 'Do',
   D: 'Ré',
   E: 'Mi',
@@ -53,7 +53,8 @@ function chordBassToHtml(mod) {
 }
 
 function keyName(name) {
-  return ROMAN_NOTATION ? NOTES[name] : name;
+  const latinNotationEnabled = getSetting('latinNotationEnabled');
+  return latinNotationEnabled ? LATIN_NOTES[name] : name;
 }
 
 function chordName(name) {
