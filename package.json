@@ -1,7 +1,7 @@
 {
   "name": "chord-display",
   "title": "Chord Display",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "A free web application to show chords and notes being played with a MIDI keyboard",
   "keywords": ["music","chord","notes","display","midi","keyboard","OBS","streamlabs","overlay"],
