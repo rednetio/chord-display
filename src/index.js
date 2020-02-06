@@ -1,12 +1,16 @@
 import './styles.css';
 import { initializeMidi } from './midi';
-import { initializeKeyboard } from './keyboard';
+import { initSettings } from './settings';
+import { render } from './ui';
 
 let initialized = false;
+
+initSettings();
+
 //init: start up MIDI
 if (!initialized) {
   initializeMidi();
   initialized = true;
 }
 
-initializeKeyboard();
+render();

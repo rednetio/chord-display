@@ -19,12 +19,37 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  display: none;
+  visibility: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#app:hover #settings {
+  visibility: visible;
+}
+
+/* TEMP */
+/* #app #settings {
+  visibility: visible;
+} */
+
+#settings fieldset {
+  background: rgba(255,255,255,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+#settings label {
+  display: flex;
+}
+
+#settings label span {
+  width: 150px;
 }
 
 #credits {
   text-align: right;
-  margin: auto 0 auto auto;
+  margin: 0 0 auto auto;
 }
 
 .badge {
@@ -40,11 +65,6 @@ h1 {
 p { font-size: 0.8em; margin: 0 0 0.1em;}
 
 a { color: hsl(6, 63%, 46%); }
-
-#app:hover #settings {
-  display: flex;
-  flex-direction: row-reverse;
-}
 
 #chordContainer {
   height: 50vh;
@@ -133,7 +153,7 @@ a { color: hsl(6, 63%, 46%); }
   fill: url(#whiteKey);
 }
 
-.note.black .piano-key{
+.note.black .piano-key {
   fill: url(#blackKey);
 }
 
@@ -163,3 +183,14 @@ a { color: hsl(6, 63%, 46%); }
 .note.tonic .piano-tonic {
   opacity: 1;
 }
+
+/*
+  Settings
+*/
+#app.hideChord #chord { display: none; }
+#app.hideBassNote .bassnote { display: none; }
+#app.hideNotes #notes { display: none; }
+#app.hideKeyboard #keyboard { display: none; }
+#app.hideKeyName .piano-key-name { display: none; }
+#app.hideTonic .piano-tonic { display: none; }
+
