@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chord Display</title>
-    <meta name="description" content="A free tool to show chords and notes being played using a MIDI keyboard"/>
-    <meta name="keywords" content="chord,display,midi,keyboard">
-    <meta name="author" content="Rémi Jarasson">
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}"/>
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta name="author" content="{{AUTHOR_NAME}}">
     <meta charset="UTF-8" />
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AMnJyQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERIRESEREAEREhERIREQARESEREhERABERIRESEREAEREhERIREQARESEREhERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
   </head>
@@ -13,10 +13,10 @@
     <div id="app">
       <div id="settings">
         <div id="credits">
-          <h1>Chord Display</h1>
-          <p>A free tool to show chords and notes being played using a MIDI keyboard.</p>
-          <p>Version <b>0.1.1</b> - Developed by <a href="http://artistix.fr" target="_blank">Rémi Jarasson</a> (<a href="https://rednet.io" target="_blank">REDNET.IO</a>)</p>
-          <p>Powered by <a href="https://github.com/tonaljs/tonal" target="_blank">tonaljs</a> - <a class="badge" href="https://github.com/rednetio/chord-display" target="_black"><img src="https://img.shields.io/github/stars/rednetio/chord-display.svg?label=Source%20on%20Github&style=social" alt="Source on Github"/></a></p>
+          <h1><a href="{{HOMEPAGE}}" target="_blank">{{TITLE}}</a></h1>
+          <p>{{DESCRIPTION}}</p>
+          <p>Version <b>{{VERSION}}</b> - Developed by {{AUTHOR_NAME}} (<a href="{{AUTHOR_URL}}" target="_blank">{{AUTHOR_URL}}</a>)</p>
+          <p>Powered by <a href="https://github.com/tonaljs/tonal" target="_blank">tonaljs</a> - <a class="badge" href="https://github.com/{{GITHUB_REPOSITORY}}" target="_black"><img src="https://img.shields.io/github/stars/{{GITHUB_REPOSITORY}}.svg?label=Source%20on%20Github&style=social" alt="Source on Github"/></a></p>
         </div>
         <form>
           <fieldset>
@@ -51,7 +51,7 @@
       </div>
 
       <div id="chordContainer">
-        <span id="chord">Chord Display</span>
+        <span id="chord">{{TITLE}}</span>
       </div>
 
       <div id="notes">Play now and see your notes</div>
