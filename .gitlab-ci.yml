@@ -1,0 +1,13 @@
+image: napp/docker-aws-cli
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script: 
+    - aws s3 sync ./dist s3://${S3_BUCKET_NAME} --exclude '.*' --only-show-errors --delete
+    - aws configure set preview.cloudfront true
+    - aws cloudfront create-invalidation --distribution-id ${CF_DISTRIBUTION_ID} --paths '/*'
+  only:
+    - /^v[0-9]+\.[0-9]+\.[0-9]+$/
