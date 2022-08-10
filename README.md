@@ -1,5 +1,9 @@
 # Chord Display
 
+<p style="color: red; font-weight: bold">This project is no longer maintained.</p>
+<p style="color: red; font-weight: bold">Due to Windows MIDI drivers being exclusive, and OBS not supporting WebMidi, I started a new project as a standalone app that includes a chord-display module.</p>
+<p style="color: red; font-weight: bold">You can find it here: <a href="https://github.com/la-jarre-a-son/midi-jar">MIDI Jar</a></p>
+
 A free tool to show chords and notes being played using a MIDI keyboard.
 
 ## Where ?
@@ -24,26 +28,39 @@ You can customize Chord Display without knowing much about programming.
 OBS BrowserSource let you inject any CSS in the page, so you can add any style to existing layout, like:
 
 Remove detected Chord:
+
 ```css
-#chord { display: none; }
+#chord {
+  display: none;
+}
 ```
 
 Remove Bass Note / Slash chord / Compound chord notation:
+
 ```css
-.bassnote { display: none; }
+.bassnote {
+  display: none;
+}
 ```
 
 Remove played Notes:
+
 ```css
-#notes { display: none; }
+#notes {
+  display: none;
+}
 ```
 
 Remove keyboard:
+
 ```css
-#keyboard { display: none; }
+#keyboard {
+  display: none;
+}
 ```
 
 Change Keyboard colors:
+
 ```css
 .note.white.active .piano-key {
   fill: #ecb2ab;
@@ -55,37 +72,58 @@ Change Keyboard colors:
 ```
 
 Remove tonic dots:
+
 ```css
-.piano-tonic { display: none; }
+.piano-tonic {
+  display: none;
+}
 ```
 
 Add a background to the keyboard:
+
 ```css
-#keyboard { 
+#keyboard {
   padding: 32px;
-  background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/bo_play_pattern.png') repeat;
+  background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/bo_play_pattern.png')
+    repeat;
 }
 ```
 
 Change display order:
+
 ```css
-#keyboard { order: 1; }
-#chordContainer { order: 2; }
-#notes { order: 3; }
+#keyboard {
+  order: 1;
+}
+#chordContainer {
+  order: 2;
+}
+#notes {
+  order: 3;
+}
 ```
 
 Change Text Color:
+
 ```css
-body { color: #fff; }
+body {
+  color: #fff;
+}
 ```
 
 Change Note Highlight Colors:
+
 ```css
-.note.white { color: #ff4444; }
-.note.black { color: #ff0000; }
+.note.white {
+  color: #ff4444;
+}
+.note.black {
+  color: #ff0000;
+}
 ```
 
 Change chord size and placement:
+
 ```css
 #chordContainer {
   align-items: flex-end;
@@ -97,7 +135,9 @@ Change chord size and placement:
   font-size: 10vh;
 }
 
-#notes { display: none; }
+#notes {
+  display: none;
+}
 ```
 
 ### via Settings in Query Params
@@ -111,7 +151,7 @@ To persist those settings, favorite the page, or copy/paste it in OBS BrowserSou
 With settings you can:
 
 | Setting Name         | Description                                           |
-|----------------------|-------------------------------------------------------|
+| -------------------- | ----------------------------------------------------- |
 | midiIn               | Select the midi input (by name)                       |
 | noteStart            | First note of keyboard                                |
 | noteEnd              | Last note of keyboard                                 |

@@ -2,11 +2,15 @@
 <html>
   <head>
     <title>{{TITLE}}</title>
-    <meta name="description" content="{{DESCRIPTION}}"/>
-    <meta name="keywords" content="{{KEYWORDS}}">
-    <meta name="author" content="{{AUTHOR_NAME}}">
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="keywords" content="{{KEYWORDS}}" />
+    <meta name="author" content="{{AUTHOR_NAME}}" />
     <meta charset="UTF-8" />
-    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AMnJyQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERIRESEREAEREhERIREQARESEREhERABERIRESEREAEREhERIREQARESEREhERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+    <link
+      href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AMnJyQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERIRESEREAEREhERIREQARESEREhERABERIRESEREAEREhERIREQARESEREhERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAREAARAAERABEQABEAAREAERAAEQABEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      rel="icon"
+      type="image/x-icon"
+    />
   </head>
 
   <body>
@@ -15,36 +19,104 @@
         <div id="credits">
           <h1><a href="{{HOMEPAGE}}" target="_blank">{{TITLE}}</a></h1>
           <p>{{DESCRIPTION}}</p>
-          <p>Version <b>{{VERSION}}</b> - Developed by {{AUTHOR_NAME}} (<a href="{{AUTHOR_URL}}" target="_blank">{{AUTHOR_URL}}</a>)</p>
-          <p>Powered by <a href="https://github.com/tonaljs/tonal" target="_blank">tonaljs</a> - <a class="badge" href="https://github.com/{{GITHUB_REPOSITORY}}" target="_black"><img src="https://img.shields.io/github/stars/{{GITHUB_REPOSITORY}}.svg?label=Source%20on%20Github&style=social" alt="Source on Github"/></a></p>
+          <p>
+            Version <b>{{VERSION}}</b> - Developed by {{AUTHOR_NAME}} (<a
+              href="{{AUTHOR_URL}}"
+              target="_blank"
+              >{{AUTHOR_URL}}</a
+            >)
+          </p>
+          <p>
+            Powered by
+            <a href="https://github.com/tonaljs/tonal" target="_blank"
+              >tonaljs</a
+            >
+            -
+            <a
+              class="badge"
+              href="https://github.com/{{GITHUB_REPOSITORY}}"
+              target="_black"
+              ><img
+                src="https://img.shields.io/github/stars/{{GITHUB_REPOSITORY}}.svg?label=Source%20on%20Github&style=social"
+                alt="Source on Github"
+            /></a>
+          </p>
+          <p class="deprecated">This project is no longer maintained.</p>
+          <p class="deprecated">
+            You can find Chord Display as a module of
+            <a href="https://github.com/la-jarre-a-son/midi-jar">MIDI Jar</a>
+          </p>
         </div>
         <form>
           <fieldset>
             <legend>Settings:</legend>
-            <label><span>MIDI Input: </span><select id="midiIn"></select></label>
-            <label><span>Note Start: </span><input id="noteStart" type="text" size="2" maxlength="2" /></label>
-            <label><span>Note End: </span><input id="noteEnd" type="text" size="2" maxlength="2" /></label>
+            <label
+              ><span>MIDI Input: </span
+              ><select id="midiIn"></select
+            ></label>
+            <label
+              ><span>Note Start: </span
+              ><input id="noteStart" type="text" size="2" maxlength="2"
+            /></label>
+            <label
+              ><span>Note End: </span
+              ><input id="noteEnd" type="text" size="2" maxlength="2"
+            /></label>
             <fieldset>
               <legend>Features:</legend>
-              <label><span>Latin Notation: </span><input id="latinNotationEnabled" type="checkbox" /></label>
-              <label><span>Pitch Wheel: </span><input id="pitchWheelEnabled" type="checkbox" /></label>
-              <label><span>Mod Wheel: </span><input id="modWheelEnabled" type="checkbox" /></label>
+              <label
+                ><span>Latin Notation: </span
+                ><input id="latinNotationEnabled" type="checkbox"
+              /></label>
+              <label
+                ><span>Pitch Wheel: </span
+                ><input id="pitchWheelEnabled" type="checkbox"
+              /></label>
+              <label
+                ><span>Mod Wheel: </span
+                ><input id="modWheelEnabled" type="checkbox"
+              /></label>
             </fieldset>
             <fieldset>
               <legend>Colors:</legend>
-              <label><span>Note: </span><input id="colorNote" type="color" /></label>
-              <label><span>Pitch Up: </span><input id="colorPitchWheelUp" type="color" /></label>
-              <label><span>Pitch Down: </span><input id="colorPitchWheelDown" type="color" /></label>
-              <label><span>Mod Wheel: </span><input id="colorModWheel" type="color" /></label>
+              <label
+                ><span>Note: </span><input id="colorNote" type="color"
+              /></label>
+              <label
+                ><span>Pitch Up: </span
+                ><input id="colorPitchWheelUp" type="color"
+              /></label>
+              <label
+                ><span>Pitch Down: </span
+                ><input id="colorPitchWheelDown" type="color"
+              /></label>
+              <label
+                ><span>Mod Wheel: </span><input id="colorModWheel" type="color"
+              /></label>
             </fieldset>
             <fieldset>
               <legend>Hide elements:</legend>
-              <label><span>Keyboard: </span><input id="hideKeyboard" type="checkbox" /></label>
-              <label><span>Chord Name: </span><input id="hideChord" type="checkbox" /></label>
-              <label><span>Bass Note: </span><input id="hideBassNote" type="checkbox" /></label>
-              <label><span>Notes: </span><input id="hideNotes" type="checkbox" /></label>
-              <label><span>Key Names: </span><input id="hideKeyName" type="checkbox" /></label>
-              <label><span>Tonic: </span><input id="hideTonic" type="checkbox" /></label>
+              <label
+                ><span>Keyboard: </span
+                ><input id="hideKeyboard" type="checkbox"
+              /></label>
+              <label
+                ><span>Chord Name: </span><input id="hideChord" type="checkbox"
+              /></label>
+              <label
+                ><span>Bass Note: </span
+                ><input id="hideBassNote" type="checkbox"
+              /></label>
+              <label
+                ><span>Notes: </span><input id="hideNotes" type="checkbox"
+              /></label>
+              <label
+                ><span>Key Names: </span
+                ><input id="hideKeyName" type="checkbox"
+              /></label>
+              <label
+                ><span>Tonic: </span><input id="hideTonic" type="checkbox"
+              /></label>
             </fieldset>
           </fieldset>
         </form>

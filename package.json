@@ -22,7 +22,7 @@
   "scripts": {
     "start": "parcel index.html --open",
     "clean": "rm -rf .cache && rm -rf ./dist",
-    "build": "yarn run clean && parcel build index.html --public-url \"./\""
+    "build": "npm run clean && parcel build index.html --public-url \"./\""
   },
   "dependencies": {
     "qs": "^6.9.1",

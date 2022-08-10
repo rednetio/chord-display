@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: sans-serif;
   height: 100%;
   margin: 0;
@@ -14,7 +15,7 @@ html, body {
 }
 
 #settings {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 16px;
   position: absolute;
   top: 0;
@@ -30,7 +31,7 @@ html, body {
 }
 
 #settings fieldset {
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: column;
 }
@@ -63,9 +64,20 @@ h1 a {
   text-decoration: none;
 }
 
-p { font-size: 0.8em; margin: 0 0 0.1em;}
+p {
+  font-size: 0.8em;
+  margin: 0 0 0.1em;
+}
 
-a { color: hsl(6, 63%, 46%); }
+a {
+  color: hsl(6, 63%, 46%);
+}
+
+.deprecated {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: red;
+}
 
 #chordContainer {
   height: 50vh;
@@ -76,7 +88,7 @@ a { color: hsl(6, 63%, 46%); }
   flex-grow: 1;
 }
 
-#chord {  
+#chord {
   font-size: 20vh;
   text-align: center;
 }
@@ -89,7 +101,8 @@ a { color: hsl(6, 63%, 46%); }
   white-space: nowrap;
 }
 
-.flat, .sharp {
+.flat,
+.sharp {
   margin: 0 -0.2em;
 }
 
@@ -120,11 +133,9 @@ a { color: hsl(6, 63%, 46%); }
 }
 
 #wheels {
-
 }
 
 #pitchWheel {
-  
 }
 
 .wheel {
@@ -147,9 +158,8 @@ a { color: hsl(6, 63%, 46%); }
 
 .piano-key-name {
   font-size: 14px;
-  fill: rgba(0,0,0,0.2);
+  fill: rgba(0, 0, 0, 0.2);
 }
-
 
 .note.white .piano-key {
   fill: url(#whiteKey);
@@ -160,11 +170,11 @@ a { color: hsl(6, 63%, 46%); }
 }
 
 .note.black {
-  color:hsl(6, 63%, 46%);
+  color: hsl(6, 63%, 46%);
 }
 
 .note.white {
-  color:hsl(6, 63%, 80%);
+  color: hsl(6, 63%, 80%);
 }
 
 .note.white.active .piano-key {
@@ -196,10 +206,21 @@ a { color: hsl(6, 63%, 46%); }
 /*
   Settings
 */
-#app.hideChord #chord { display: none; }
-#app.hideBassNote .bassnote { display: none; }
-#app.hideNotes #notes { display: none; }
-#app.hideKeyboard #keyboard { display: none; }
-#app.hideKeyName .piano-key-name { display: none; }
-#app.hideTonic .piano-tonic { display: none; }
-
+#app.hideChord #chord {
+  display: none;
+}
+#app.hideBassNote .bassnote {
+  display: none;
+}
+#app.hideNotes #notes {
+  display: none;
+}
+#app.hideKeyboard #keyboard {
+  display: none;
+}
+#app.hideKeyName .piano-key-name {
+  display: none;
+}
+#app.hideTonic .piano-tonic {
+  display: none;
+}
