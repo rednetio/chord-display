@@ -1,7 +1,7 @@
 {
   "name": "chord-display",
   "title": "Chord Display",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "A free web application to show chords and notes being played with a MIDI keyboard",
   "keywords": [
